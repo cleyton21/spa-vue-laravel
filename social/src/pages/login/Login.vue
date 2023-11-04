@@ -52,13 +52,20 @@
           }else if(response.data.status == false) {
             //login nao existe
             console.log('login nao existe');
+            alert('Ooops...Login inválido');
           }else{
             //erros de validacao
             console.log('erros de validacao');
+            let erros = '';
+            for(let erro of Object.values(response.data)) {
+              erros += erro +" ";
+            }
+            alert(erros);
           }
         })
         .catch(e => {
           console.log(e)
+          alert("Erro...Tente novamente mais tarde!");
         })
       }
     }
