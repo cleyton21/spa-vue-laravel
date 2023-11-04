@@ -1,0 +1,59 @@
+Api com Laravel:
+
+instalar o Laravel
+composer create-project --prefer-dist laravel/laravel webservice "5.5.*"
+
+Criar a pasta Vendor do Código Fonte do webservice:
+Rodar comando dentro do diretório webservice
+composer update
+
+composer require laravel/passport "4.0" --with-all-dependencies
+
+configurar o banco de dados ...
+criar arquivo dentro do dir database
+database.sqlite
+
+em .env deixar somente
+DB_CONNECTION=sqlite
+DB_HOST=127.0.0.1
+DB_PORT=3306
+
+php artisan migrate
+
+php artisan passport:install
+
+colocar no app -> User.php:
+use Laravel\Passport\HasApiTokens;
+use HasApiTokens, Notifiable;
+
+e o config/auth
+
+'api' => [
+    'driver' => 'passport',
+    'provider' => 'users',
+],
+
+pronto...
+
+rodar laravel
+php artisan serve
+
+fazer o downgrading
+composer require lcobucci/jwt 3.3.3
+
+criar rotas de cadastro e de login e depois testar o acesso com token
+
+Baixar o Postman:
+
+https://www.getpostman.com/
+
+Axios
+
+npm install axios --save
+
+import axios from 'axios'
+
+
+
+
+
