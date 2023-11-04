@@ -52,6 +52,7 @@
             //transforma o objeto json em string e salva no session storae do navegador
             //qnd fecha o navegador ele apaga
             sessionStorage.setItem('usuario',JSON.stringify(response.data));
+            this.$router.push('/');
           }else if(response.data.status == false) {
             //login nao existe
             console.log('login nao existe');

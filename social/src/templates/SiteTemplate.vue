@@ -3,8 +3,10 @@
       <header>
         <nav-bar logo="Social" url="/" cor="green darken-1">
           <li><router-link to="/">Home</router-link></li>
-          <li><router-link to="/login">Entrar</router-link></li>
-          <li><router-link to="/cadastro">Cadastre-se</router-link></li>
+          <li v-if="!usuario"><router-link to="/login">Entrar</router-link></li>
+          <li v-if="!usuario"><router-link to="/cadastro">Cadastre-se</router-link></li>
+          <li v-if="usuario"><router-link to="/perfil">{{ usuario.name }}</router-link></li>
+          <li v-if="usuario"><a v-on:click="sair()">Sair</a></li>
         </nav-bar>
       </header>
   
@@ -43,11 +45,31 @@
   import CardMenuVue from '@/components/layouts/CardMenuVue'
   export default {
     name: 'SiteTemplate',
+    data() {
+      return {
+        usuario: false
+      }
+    },
     components: {
       NavBar,
       FooterVue,
       GridVue,
       CardMenuVue
+    },
+    //metodo criado sempre que o componente é criado
+    created(){
+      console.log('created()');
+      let usuarioAux = sessionStorage.getItem('usuario');
+      if(usuarioAux) {
+        //pega a string que esta salva em local storage e transforma em objeto vovamnete pra usar
+        this.usuario = JSON.parse(usuarioAux);
+      }
+    },
+    methods:{
+      sair(){
+        sessionStorage.clear();
+        this.usuario = false;
+      }
     }
   }
   </script>

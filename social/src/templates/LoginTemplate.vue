@@ -61,6 +61,7 @@
       if(usuarioAux) {
         //pega a string que esta salva em local storage e transforma em objeto vovamnete pra usar
         this.usuario = JSON.parse(usuarioAux);
+        this.$router.push('/');
       }
     },
     methods:{
