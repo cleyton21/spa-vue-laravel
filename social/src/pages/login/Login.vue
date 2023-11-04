@@ -46,6 +46,16 @@
         })
         .then(response => {
           console.log(response)
+          if(response.data.token) {
+            //login com sucesso
+            console.log('login com sucesso');
+          }else if(response.data.status == false) {
+            //login nao existe
+            console.log('login nao existe');
+          }else{
+            //erros de validacao
+            console.log('erros de validacao');
+          }
         })
         .catch(e => {
           console.log(e)
