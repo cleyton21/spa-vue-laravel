@@ -45,10 +45,13 @@
           password: this.password
         })
         .then(response => {
-          console.log(response)
+          //console.log(response)
           if(response.data.token) {
             //login com sucesso
             console.log('login com sucesso');
+            //transforma o objeto json em string e salva no session storae do navegador
+            //qnd fecha o navegador ele apaga
+            sessionStorage.setItem('usuario',JSON.stringify(response.data));
           }else if(response.data.status == false) {
             //login nao existe
             console.log('login nao existe');
