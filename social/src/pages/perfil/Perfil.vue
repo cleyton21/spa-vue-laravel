@@ -74,12 +74,8 @@
 
         })
         .catch(e => {
-          if (e.code === 'ERR_NETWORK') {
-    alert("Erro na rede. Verifique sua conexão e tente novamente mais tarde.");
-  } else {
-    console.log(e);
-    alert("Erro desconhecido. Tente novamente mais tarde.");
-  }
+          console.log(e);
+          alert("Erro...Tente novamente mais tarde!");
         })
       }
     }
