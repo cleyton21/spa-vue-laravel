@@ -62,38 +62,24 @@
     },
     methods:{
       perfil(){
-        console.log('ok');
-        axios.post('http://127.0.0.1:8000/api/perfil' ,{
+        axios.put('http://127.0.0.1:8000/api/perfil' ,{
           name: this.name,
           email: this.email,
           password: this.password,
           password_confirmation: this.password_confirmation
-        })
+        },{"headers":{"authorization":"Bearer "+this.usuario.token}})
         .then(response => {
-          //console.log(response)
-          if(response.data.token) {
-            //login com sucesso
-            console.log('Cadastro realizado com sucesso');
-            //transforma o objeto json em string e salva no session storae do navegador
-            //qnd fecha o navegador ele apaga
-            sessionStorage.setItem('usuario',JSON.stringify(response.data));
-            this.$router.push('/');
-          }else if(response.data.status == false) {
-            //login nao existe
-            alert('Ooops...Erro no cadastro! Tente novamente mais tarde!');
-          }else{
-            //erros de validacao
-            console.log('erros de validacao');
-            let erros = '';
-            for(let erro of Object.values(response.data)) {
-              erros += erro +" ";
-            }
-            alert(erros);
-          }
+
+            console.log(response.data);
+
         })
         .catch(e => {
-          console.log(e)
-          alert("Erro...Tente novamente mais tarde!");
+          if (e.code === 'ERR_NETWORK') {
+    alert("Erro na rede. Verifique sua conexão e tente novamente mais tarde.");
+  } else {
+    console.log(e);
+    alert("Erro desconhecido. Tente novamente mais tarde.");
+  }
         })
       }
     }
