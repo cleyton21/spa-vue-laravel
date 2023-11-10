@@ -16,7 +16,7 @@
           <div class="file-field input-field">
             <div class="btn">
               <span>Imagem</span>
-              <input type="file">
+              <input type="file" v-on:change="salvaImagem">
             </div>
             <div class="file-path-wrapper">
               <input class="file-path validate" type="text">
@@ -45,7 +45,8 @@
         name:'',
         email:'',
         password:'',
-        password_confirmation:''
+        password_confirmation:'',
+        imagem:''
       }
     },
     created(){
@@ -61,6 +62,22 @@
       SiteTemplate
     },
     methods:{
+      salvaImagem(e){
+        //dataTransfer é para pegar o nome da imagem quando arrasta ela para dentro do campo imagem
+        let arquivo = e.target.files || e.dataTransfer.files;
+        //se nao existir arquivo, para
+        if(!arquivo.length) {
+          return;
+        }
+
+        let reader = new FileReader();
+        reader.onload = (e) => {
+          this.imagem = e.target.result;
+        };
+
+        reader.readAsDataURL(arquivo[0]);
+        console.log(this.imagem);
+      },
       perfil(){
         axios.put('http://127.0.0.1:8000/api/perfil' ,{
           name: this.name,
