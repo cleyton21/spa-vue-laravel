@@ -59,6 +59,7 @@ Route::post("/login", function (Request $request) {
     if (Auth::attempt(['email'=>$data['email'], 'password'=>$data['password']])) {
         $user = auth()->user();
         $user->token = $user->createToken($user->email)->accessToken;
+        $user->imagem = asset($user->imagem);
     } else {
         return ['status'=>false];
     }

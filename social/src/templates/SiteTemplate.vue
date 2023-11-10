@@ -18,7 +18,10 @@
                   <slot name="menuesquerdo"/>  
                 </card-menu-vue>
               <card-menu-vue>
-                <h3>Teste</h3>
+                <h3>Amigos</h3>
+                <li>Maria</li>
+                <li>Bia</li>
+                <li>José</li>
               </card-menu-vue>
             </grid-vue>
             <grid-vue tamanho="8">

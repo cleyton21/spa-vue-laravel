@@ -49,6 +49,7 @@
         imagem:''
       }
     },
+    //verifica se está logado e pega os dados salvos em sessionstorage
     created(){
       let usuarioAux = sessionStorage.getItem('usuario');
       if(usuarioAux) {
