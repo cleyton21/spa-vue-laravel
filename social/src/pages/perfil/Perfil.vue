@@ -70,7 +70,21 @@
         },{"headers":{"authorization":"Bearer "+this.usuario.token}})
         .then(response => {
 
+          if(response.data.token) {
+            //login com sucesso
             console.log(response.data);
+            sessionStorage.setItem('usuario',JSON.stringify(response.data));
+            alert('Perfil atualizado');
+          }else{
+            //erros de validação
+            console.log('erros de validação');
+            let erros = '';
+            for(let erro of Object.values(response.data)) {
+              erros += erro +" ";
+            }
+            alert(erros);
+          }
+
 
         })
         .catch(e => {
