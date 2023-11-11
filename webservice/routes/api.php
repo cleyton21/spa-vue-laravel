@@ -23,16 +23,21 @@ Route::middleware('auth:api')->put('/perfil', "UsuarioController@perfil");
 Route::get('/testes', function(){
 
     $user = User::find(1);
-    $user->conteudos()->create([
-        'titulo' => 'Conteudo3',
-        'texto' => 'Aqui o texto',
-        'imagem' => 'Url da imagem',
-        'link' => 'Link',
-        'data' => '2023-11-11',
-    ]);
+    $user2 = User::find(2);
 
-    return $user->conteudos;
+    // $user->conteudos()->create([
+    //     'titulo' => 'Conteudo3',
+    //     'texto' => 'Aqui o texto',
+    //     'imagem' => 'Url da imagem',
+    //     'link' => 'Link',
+    //     'data' => '2023-11-11',
+    // ]);
+    // return $user->conteudos;
 
-
+    //add amigos
+    // $user->amigos()->attach($user2->id);    
+    // $user->amigos()->detach($user2->id);    
+    // $user->amigos()->toggle($user2->id);    
+    // return $user->amigos;
 
 });
