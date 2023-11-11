@@ -20,7 +20,7 @@
 
     export default {
       name: 'PublicarConteudoVue',
-      props: [],
+      props: ['usuario'],
       data () {
         return {
           conteudo:{titulo:'', texto:'', link:'', imagem:''}
@@ -32,7 +32,17 @@
       methods:{
         addConteudo(){
           console.log(this.conteudo);
-          this.$http.post(this.$urlAPI+'conteudo/adicionar',this.conteudo,{})
+          this.$http.post(this.$urlAPI+'conteudo/adicionar',{
+            titulo: this.conteudo.titulo,
+            texto: this.conteudo.texto,
+            link: this.conteudo.link,
+            imagem: this.conteudo.imagem,
+          },
+          {"headers":{"authorization":"Bearer "+this.usuario.token}}).then(response => {
+             if(response.data.status){
+              console.log(response.data.conteudos);
+             }
+          })
         }
       }
     }
