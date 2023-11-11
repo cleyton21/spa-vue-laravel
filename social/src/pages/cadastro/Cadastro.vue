@@ -50,24 +50,23 @@
         })
         .then(response => {
           //console.log(response)
-          if(response.data.token) {
+          if(response.data.status) {
             //login com sucesso
             console.log('Cadastro realizado com sucesso');
             //transforma o objeto json em string e salva no session storae do navegador
             //qnd fecha o navegador ele apaga
-            sessionStorage.setItem('usuario',JSON.stringify(response.data));
+            sessionStorage.setItem('usuario',JSON.stringify(response.data.usuario));
             this.$router.push('/');
-          }else if(response.data.status == false) {
-            //login nao existe
-            alert('Ooops...Erro no cadastro! Tente novamente mais tarde!');
-          }else{
+          }else if(response.data.status == false && response.data.validacao) {
             //erros de validacao
             console.log('erros de validacao');
             let erros = '';
-            for(let erro of Object.values(response.data)) {
+            for(let erro of Object.values(response.data.erros)) {
               erros += erro +" ";
             }
             alert(erros);
+          }else{
+            alert('Ooops...Erro no cadastro! Tente novamente mais tarde!');
           }
         })
         .catch(e => {

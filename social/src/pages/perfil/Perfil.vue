@@ -90,17 +90,18 @@
         },{"headers":{"authorization":"Bearer "+this.usuario.token}})
         .then(response => {
 
-          if(response.data.token) {
+          if(response.data.status) {
             //login com sucesso
-            console.log(response.data);
-            this.usuario = response.data;
+            //console.log(response.data);
+            this.usuario = response.data.usuario;
             sessionStorage.setItem('usuario',JSON.stringify(this.usuario));
             alert('Perfil atualizado');
-          }else{
+
+          }else if(response.data.status == false && response.data.validacao){
             //erros de validação
-            console.log('erros de validação');
+            //console.log('erros de validação');
             let erros = '';
-            for(let erro of Object.values(response.data)) {
+            for(let erro of Object.values(response.data.erros)) {
               erros += erro +" ";
             }
             alert(erros);

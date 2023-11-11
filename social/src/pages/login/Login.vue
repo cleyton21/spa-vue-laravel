@@ -44,25 +44,26 @@
         })
         .then(response => {
           //console.log(response)
-          if(response.data.token) {
+          if(response.data.status) {
             //login com sucesso
             console.log('login com sucesso');
             //transforma o objeto json em string e salva no session storae do navegador
             //qnd fecha o navegador ele apaga
-            sessionStorage.setItem('usuario',JSON.stringify(response.data));
+            sessionStorage.setItem('usuario',JSON.stringify(response.data.usuario));
             this.$router.push('/');
-          }else if(response.data.status == false) {
+          }else if(response.data.status == false && response.data.validacao) {
             //login nao existe
-            console.log('login nao existe');
-            alert('Ooops...Login inválido');
-          }else{
-            //erros de validacao
             console.log('erros de validacao');
             let erros = '';
-            for(let erro of Object.values(response.data)) {
+            for(let erro of Object.values(response.data.erros)) {
               erros += erro +" ";
             }
             alert(erros);
+            
+          }else{
+            //erros de validacao
+            console.log('login nao existe');
+            alert('Ooops...Login inválido');
           }
         })
         .catch(e => {
