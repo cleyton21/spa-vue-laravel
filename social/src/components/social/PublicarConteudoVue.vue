@@ -9,8 +9,8 @@
           <label :class="{ 'active': conteudo.titulo || conteudo.texto || conteudo.link || conteudo.imagem }">O que está acontecendo?</label>
 
         </grid-vue> 
-        <p>
-          <grid-vue v-if="conteudo.titulo && conteudo.texto" class="btn waves-effect waves-light" tamanho="2 offset-s10">Publicar</grid-vue>
+        <p class="right-align">
+          <button @click="addConteudo()" v-if="conteudo.titulo && conteudo.texto" class="btn waves-effect waves-light">Publicar</button>
         </p>
     </div>
 </template>
@@ -28,6 +28,12 @@
       },
       components: {
         GridVue
+      },
+      methods:{
+        addConteudo(){
+          console.log(this.conteudo);
+          this.$http.post(this.$urlAPI+'conteudo/adicionar',this.conteudo,{})
+        }
       }
     }
     </script>
