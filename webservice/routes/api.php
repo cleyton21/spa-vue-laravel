@@ -1,6 +1,5 @@
 <?php
 
-// use App\User;
 // use Illuminate\Routing\Route;
 
 /*
@@ -14,7 +13,26 @@
 |
 */
 
+use App\User;
+
 Route::post("/cadastro", "UsuarioController@cadastro");
 Route::post("/login", "UsuarioController@login");
 Route::middleware('auth:api')->get('/usuario', "UsuarioController@usuario");
 Route::middleware('auth:api')->put('/perfil', "UsuarioController@perfil");
+
+Route::get('/testes', function(){
+
+    $user = User::find(1);
+    $user->conteudos()->create([
+        'titulo' => 'Conteudo3',
+        'texto' => 'Aqui o texto',
+        'imagem' => 'Url da imagem',
+        'link' => 'Link',
+        'data' => '2023-11-11',
+    ]);
+
+    return $user->conteudos;
+
+
+
+});
