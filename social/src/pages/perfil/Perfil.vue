@@ -35,7 +35,6 @@
   
   <script>
   import SiteTemplate from '@/templates/SiteTemplate'
-  import axios from 'axios';
 
   export default {
     name: 'Perfil',
@@ -80,7 +79,9 @@
         // console.log(this.imagem);
       },
       perfil(){
-        axios.put('http://127.0.0.1:8000/api/perfil' ,{
+        //to usando this.http em vez de axios.put.., porque fiz uma instancia do axios em main.js
+        //e nao preciso importar mais o axios nessa pagina
+        this.$http.put(this.$urlAPI+'perfil' ,{
           name: this.name,
           email: this.email,
           imagem: this.imagem,
